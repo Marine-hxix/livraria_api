@@ -1,0 +1,19 @@
+[project]
+name = "livraria-api"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Marine Silva",email = "155833424+Marine-hxix@users.noreply.github.com"}
+]
+requires-python = ">=3.14"
+dependencies = [
+    "uvicorn (>=0.52.1,<0.53.0)"
+]
+
+[tool.ruff]
+line-length = 79
+extend-exclude = ['migrations']
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
