@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 # Instancia principal da aplicacao.
@@ -22,7 +22,7 @@ def listar_livros():
     return livros
 
 # Endpoint responsavel por criar um novo livro a partir das informacoes enviadas pelo cliente.
-@app.post("/livros")
+@app.post("/livros", status_code=201)
 def criar_livro (livro: Livro):
     novo_livro = {"id": len(livros) + 1, "titulo": livro.titulo, "autor": livro.autor, "nacionalidade": livro.nacionalidade}
     livros.append(novo_livro)
@@ -36,8 +36,13 @@ livros = [
 
 # Endpoint responsavel por atualizar os livros ou substituir.
 @app.put("/livros/{livros_id}")
-def alterar_livros(livros_id: int):
-    return {"message": f"Livro com a id {livros_id} atualizado com sucesso."}
+def alterar_livros(livros_id: int, livro: Livro):
+    for alterar_livro in livros:
+        if alterar_livro ["id"] == livros_id:
+            alterar_livro["titulo"] = livro.titulo
+            alterar_livro["autor"] = livro.autor
+            return alterar_livro
+    raise HTTPException (status_code=404, detail="Livro não encontrado.")
 
 
 # Endpoint responsavel por atualizar o respectivo campo desejado.
@@ -51,13 +56,17 @@ def buscar_livro(livro_id: int):
     for livro in livros:
         if livro["id"] == livro_id:
             return livro
-    return {"message": "Obra não encontrada."}
+    raise HTTPException (status_code=404, detail="Livro não encontrado.")
 
 
 # Endpoint responsavel por deletar um livro pelo identificador informado na URL.
 @app.delete("/livros/{livro_id}")
 def deletar_livro(livro_id: int):
-    return {"message": f"Livro com a id {livro_id} apagado com sucesso."}
+    for indice, livro in enumerate(livros):
+        if livro["id"] == livro_id:
+            livros.pop(indice)
+            return {"message": f"Livro com a id {livro_id} apagado com sucesso."}
+    raise HTTPException (status_code=404, detail= "Livro não encontrado.")
 
 # Endpoint responsavel por consultar o autor do livro pelo uso de identificador.
 @app.get("/livros/{livro_id}/autor")

@@ -138,4 +138,10 @@ Explique, com suas próprias palavras, o caminho percorrido por:
 }
 
 desde o momento em que o cliente envia o dado até ele chegar à função criar_livro().
-    O cliente se depara com um campo a ser preenchido -> a informacao e recebida e validada pelo parametro -> Resposta HTTP(ok) -> informacao armazeda na memoria temporaria -> Resposta ao cliente.
+    O cliente se depara com um campo a ser preenchido -> a informacao e recebida e validada pelo parametro -> 
+    Resposta HTTP(ok) -> informacao armazeda na memoria temporaria -> Resposta ao cliente.
+
+Por que você acha que validar os dados antes de executar a lógica da aplicação é importante?
+    Acredito que os dados nao devam ser armazedados de qualquer forma, a tipagem correta garante a integridade e a visibilidade
+    da informacao. E posteriormente com a idexacao ao banco de dados, onde se faz preciso estabelecer regras claras para a sua
+    armazenagem.
