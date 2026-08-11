@@ -13,6 +13,8 @@ def home():
 class Livro(BaseModel):
     titulo: str
     autor: str
+    nacionalidade: str
+
 
 # Lista temporária utilizada apenas para simular os dados da nossa aplicação.
 @app.get("/livros")
@@ -22,7 +24,7 @@ def listar_livros():
 # Endpoint responsavel por criar um novo livro a partir das informacoes enviadas pelo cliente.
 @app.post("/livros")
 def criar_livro (livro: Livro):
-    novo_livro = {"id": len(livros) + 1, "titulo": livro.titulo, "autor": livro.autor}
+    novo_livro = {"id": len(livros) + 1, "titulo": livro.titulo, "autor": livro.autor, "nacionalidade": livro.nacionalidade}
     livros.append(novo_livro)
     return novo_livro
 
