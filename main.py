@@ -53,9 +53,9 @@ def editar_livros(livros_id: int):
 # Endpoint responsavel por consultar um livro pelo identificador informado na URL.
 @app.get("/livros/{livro_id}")
 def buscar_livro(livro_id: int):
-    for livro in livros:
+    for indice, livro in enumerate(livros):
         if livro["id"] == livro_id:
-            return livro
+            return {"message": f"Livro com a id {livro_id} encontrado com sucesso."}
     raise HTTPException (status_code=404, detail="Livro não encontrado.")
 
 

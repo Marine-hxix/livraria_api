@@ -145,3 +145,50 @@ Por que você acha que validar os dados antes de executar a lógica da aplicaç�
     Acredito que os dados nao devam ser armazedados de qualquer forma, a tipagem correta garante a integridade e a visibilidade
     da informacao. E posteriormente com a idexacao ao banco de dados, onde se faz preciso estabelecer regras claras para a sua
     armazenagem.
+
+## Capítulo 2 — Seção 2.5
+
+### Reflexão
+
+1. O que significa Error Handling?
+    Literalmente significa tratamento de erro.
+
+2. Para que serve HTTPException?
+    Serve para que de forma clara o erro seja exibido ao cliente.
+3. Qual é a diferença entre:
+   
+   return {"detail": "Livro não encontrado"}
+   
+   e
+   
+   raise HTTPException(status_code=404, ...)
+   Livro nao encontrado significa que o referido item nao foi encontrado no banco de dados.
+   Status_code significa que a informacao passada pelo cliente esta errada. Exemplo, o metodo esperava uma string, mas foi 
+   preencicho com int.
+
+4. O que significa o código HTTP 404?
+    Significa que a informacao repassada pelo cliente nao esta de acordo com a tipagem estabelecida no codigo.
+5. Quando utilizamos o código 201?
+    Quando se faz a criacao de um novo item determinado, e retornado o referido codigo como: criacao bem sucedida.
+6. Por que não devemos retornar 200 para todas as situações?
+    Uma requisicao pode ser retornada como "Ok", mas nao significa que foi tratada e valida.
+
+### Pense como desenvolvedor
+
+Imagine que um usuário tente excluir um livro que não existe. Qual deveria ser o comportamento da API? Explique o motivo.
+    Receber a requisicao do cliente, tratar e validar as informacoes, retornar o erro 404.
+### Minha explicação
+
+Explique, com suas próprias palavras, o que acontece nesta instrução:
+
+    raise HTTPException(
+    status_code=404,
+    detail="Livro não encontrado"
+    )
+    A informacao e repassada pelo cliente, a respectiva funcao trata e valida a informacao, a mensagem e impressao ao usuario.
+
+Erro ao enviar um tipo de dado diferente.
+    Please correct the following validation errors and try again.
+    For 'livro_id': Value must be an integer.
+Ao preencher o campo com uma string, o FastAPI retorna informando
+que esse espera um int ao inves de str, tendo em vista que a regra esta definida na funcao.
